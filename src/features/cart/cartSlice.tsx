@@ -10,10 +10,22 @@ export const cartSlice = createSlice({
     increment: (state: Array<any>, action) => {
       state.push(action.payload)
     },
+    decrement: (state: Array<any>, action) => {
+      let index = -1
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].name === action.payload.name) {
+          index = i
+          break
+        }
+      }
+      if (index !== -1) {
+        state.splice(index, 1)
+      }
+    },
   },
 })
 
-export const { increment } = cartSlice.actions
+export const { increment, decrement } = cartSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
