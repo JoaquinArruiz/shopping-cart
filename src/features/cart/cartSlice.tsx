@@ -15,13 +15,14 @@ export const cartSlice = createSlice({
       let index = -1;
       for (let i = 0; i < state.content.length; i++) {
         if (state.content[i].name === action.payload.name) {
+          console.log(index)
           index = i;
           break;
         }
       }
       if (index !== -1) {
-        state.content.splice(index, 1);
         state.total -= state.content[index].price;
+        state.content.splice(index, 1);
       }
     },
     clear: (state: any) => {

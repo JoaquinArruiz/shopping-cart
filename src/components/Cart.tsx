@@ -4,19 +4,19 @@ import { selectCart } from "../features/cart/cartSlice";
 import { inventory } from "../inventory";
 import { Link } from "react-router-dom";
 
+const countAmount = (array: any, item: any) => {
+  let count = 0;
+  array.forEach((element: any) => {
+    if (element.name === item.name) {
+      count++;
+    }
+  });
+  return count;
+};
+
 function Cart() {
   const cart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-
-  const countAmount = (array: any, item: any) => {
-    let count = 0;
-    array.forEach((element: any) => {
-      if (element.name === item.name) {
-        count++;
-      }
-    });
-    return count;
-  };
 
   return (
     <div className="flex h-screen w-screen bg-red-600">
@@ -72,4 +72,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export {Cart , countAmount};
