@@ -7,8 +7,8 @@ function Browse() {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex h-screen w-screen bg-red-700">
-      <div className="m-3 flex flex-col border-2 border-black px-8">
+    <div className="flex h-screen w-screen bg-red-600">
+      <div className="m-6 flex flex-col border-2 border-black bg-red-700 px-8">
         <div>
           <Link to="/cart">Cart</Link>
         </div>
@@ -16,11 +16,11 @@ function Browse() {
           <Link to="/">Homepage</Link>
         </div>
       </div>
-      <div className="m-3 flex w-full flex-row border-2 border-black">
+      <div className="m-6 flex w-full flex-row border-2 border-black bg-red-700 p-5">
         {inventory.map((item, index) => (
           <div
             key={index}
-            className="m-3 flex h-28 w-28 items-center justify-center border-2 border-black"
+            className="ml-3 flex h-28 w-28 items-center justify-center border-2 border-black"
           >
             <span className="h-min">{item.name}</span>
             <button className="h-min" onClick={() => dispatch(increment(item))}>
