@@ -1,12 +1,12 @@
-import { Cart } from "./features/cart/Cart"
 import "./App.css"
+import { Link } from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Cart />
-      </header>
+      biem venidos
+      <Link to="cart">cart</Link>
+      <Link to="browse">browse</Link>
     </div>
   )
 }
