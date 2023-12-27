@@ -1,5 +1,5 @@
 import { useAppDispatch } from "./../app/hooks";
-import { increment, decrement, selectCart } from "../features/cart/cartSlice";
+import { increment, decrement } from "../features/cart/cartSlice";
 import { inventory } from "./../inventory";
 import { Link } from "react-router-dom";
 
@@ -10,10 +10,10 @@ function Browse() {
     <div className="flex h-screen w-screen bg-red-700">
       <div className="m-3 flex flex-col border-2 border-black px-8">
         <div>
-          <Link to="/cart">cart</Link>
+          <Link to="/cart">Cart</Link>
         </div>
         <div>
-          <Link to="/">homepage</Link>
+          <Link to="/">Homepage</Link>
         </div>
       </div>
       <div className="m-3 flex w-full flex-row border-2 border-black">
@@ -36,4 +36,4 @@ function Browse() {
   );
 }
 
-export default Browse;
+export { Browse };

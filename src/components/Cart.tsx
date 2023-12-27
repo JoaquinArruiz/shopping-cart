@@ -1,20 +1,20 @@
-import { useAppSelector } from "../app/hooks"
-import { selectCart } from "../features/cart/cartSlice"
-import { inventory } from "../inventory"
-import { Link } from "react-router-dom"
+import { useAppSelector } from "../app/hooks";
+import { selectCart } from "../features/cart/cartSlice";
+import { inventory } from "../inventory";
+import { Link } from "react-router-dom";
 
 function Cart() {
-  const cart = useAppSelector(selectCart)
+  const cart = useAppSelector(selectCart);
 
   const countAmount = (array: any, item: any) => {
-    let count = 0
+    let count = 0;
     array.forEach((element: any) => {
       if (element.name === item.name) {
-        count++
+        count++;
       }
-    })
-    return count
-  }
+    });
+    return count;
+  };
 
   return (
     <div>
@@ -33,7 +33,7 @@ function Cart() {
       <Link to="/browse">browse</Link>
       <Link to="/">homepage</Link>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

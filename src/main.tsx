@@ -1,12 +1,12 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import { Provider } from "react-redux"
-import { store } from "./app/store"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import App from "./App"
-import Browse from "./components/Browse"
-import Cart from "./components/Cart"
-import "./index.css"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import { Browse } from "./components/Browse";
+import Cart from "./components/Cart";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     path: "about",
     element: <></>,
   },
-])
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -33,4 +33,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,
-)
+);
