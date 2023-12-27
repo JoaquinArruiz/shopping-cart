@@ -15,6 +15,7 @@ function Browse() {
           <button onClick={() => dispatch(decrement(item))}>-</button>
         </div>
       ))}
+      
 
       <Link to="/cart">cart</Link>
     </div>
