@@ -31,6 +31,7 @@ function Cart() {
           ))}
       </div>
       <Link to="/browse">browse</Link>
+      <Link to="/">homepage</Link>
     </div>
   )
 }
