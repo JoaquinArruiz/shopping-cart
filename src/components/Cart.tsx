@@ -62,7 +62,7 @@ function Cart() {
         </div>
         <div className="ml-2 mt-2 border-2 border-black p-3">
           contador
-          <div>total: {}</div>
+          <div>total: {cart.total}</div>
           <button onClick={() => dispatch(clear())}>borrar</button>
         </div>
       </div>
