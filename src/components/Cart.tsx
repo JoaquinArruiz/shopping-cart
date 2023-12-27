@@ -72,4 +72,4 @@ function Cart() {
   );
 }
 
-export {Cart , countAmount};
+export { Cart, countAmount };

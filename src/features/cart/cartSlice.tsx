@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
       let index = -1;
       for (let i = 0; i < state.content.length; i++) {
         if (state.content[i].name === action.payload.name) {
-          console.log(index)
+          console.log(index);
           index = i;
           break;
         }
