@@ -7,6 +7,7 @@ import App from "./App";
 import { Browse } from "./components/Browse";
 import {Cart} from "./components/Cart";
 import "./index.css";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
+      <Toaster />
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,
