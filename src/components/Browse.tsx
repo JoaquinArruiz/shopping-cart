@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "./../app/hooks";
 import { increment, decrement } from "../features/cart/cartSlice";
 import { inventory } from "./../inventory";
-import { countAmount } from "./Cart";
+import { getQty } from "./Cart";
 import { Link } from "react-router-dom";
 import { selectCart } from "../features/cart/cartSlice";
-import { Header } from "./header";
-import { Toaster, toast } from "sonner";
+import { Header } from "./Header";
+import { toast } from "sonner";
 
 function Browse() {
   const dispatch = useAppDispatch();
@@ -37,26 +37,26 @@ function Browse() {
             >
               <img
                 className="h-3/4"
-                src={item.image}
-                alt={item.name + " image"}
+                src={item.images[0]}
+                alt={item.title + " image"}
               />
               <div className="flex h-1/4 flex-row items-center justify-between">
-                <p className="h-min w-3/4 text-left text-lg">{item.name}</p>
+                <p className="h-min w-3/4 text-left text-lg">{item.title}</p>
                 <p className="h-min w-1/4 text-right text-lg">$ {item.price}</p>
                 <button
                   className="m-3 size-6 h-auto w-10  rounded-full bg-rama-light text-black"
                   onClick={() => {
                     dispatch(increment(item));
-                    toast(`Added ${item.name} to cart`);
+                    toast(`Added ${item.title} to cart`);
                   }}
                 >
                   +
                 </button>
-                {countAmount(cart.content, item) > 0 ? (
+                {getQty(cart.content, item) > 0 ? (
                   <button
                     className="m-3 size-6 h-auto w-10  rounded-full bg-rama-light text-black"
                     onClick={() => {
-                      toast(`Removed ${item.name} from cart`);
+                      toast(`Removed ${item.title} from cart`);
                       dispatch(decrement(item));
                     }}
                   >

@@ -17,7 +17,7 @@ export const Header = () => {
           <Link to="/">Home</Link>
           <Link to="/browse">Browse</Link>
           <Link to="/cart">
-            Cart {cart.content.length === 0 ? "" : `(${cart.content.length})`}
+            Cart {cart.totalQty === 0 ? "" : `(${cart.totalQty})`}
           </Link>
         </div>
       </div>

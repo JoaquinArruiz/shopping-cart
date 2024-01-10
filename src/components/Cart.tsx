@@ -1,19 +1,19 @@
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { increment, decrement, clear } from "../features/cart/cartSlice";
 import { selectCart } from "../features/cart/cartSlice";
-import { inventory } from "../inventory";
-import { Link } from "react-router-dom";
-import { Header } from "./header";
+import { Header } from "./Header";
 import { toast } from "sonner";
+import { CartItemInterface } from "../features/cart/cartSlice";
 
-const countAmount = (array: any, item: any) => {
-  let count = 0;
-  array.forEach((element: any) => {
-    if (element.name === item.name) {
-      count++;
+const getQty = (array: any, item: any) => {
+  let qty = 0;
+  array.forEach((cartItem: CartItemInterface) => {
+    if (cartItem.item.title === item.title) {
+      qty = cartItem.qty;
     }
   });
-  return count;
+
+  return qty;
 };
 
 function Cart() {
@@ -26,34 +26,34 @@ function Cart() {
       <div className="flex h-screen w-full bg-rama-darker text-neutral-50">
         <div className="m-6 flex w-full flex-row border-2 border-black bg-rama-dark p-5">
           <div className="flex w-full flex-col">
-            {inventory
-              .filter((item) => countAmount(cart.content, item) > 0)
-              .map((item, index) => (
+            {cart.content.map((cartItem: CartItemInterface, index: number) =>
+              cartItem.qty > 0 ? (
                 <div
                   key={index}
                   className="mt-2 flex flex-row justify-around rounded-lg bg-rama-darker p-3 shadow-sm shadow-black"
                 >
-                  <div>{item.name}</div>
-                  <div>cantidad: {countAmount(cart.content, item)}</div>
-                  <div>
-                    subtotal: {item.price * countAmount(cart.content, item)}
-                  </div>
+                  <div>{cartItem.item.title}</div>
+                  <div>cantidad: {cartItem.qty}</div>
+                  <div>subtotal: {cartItem.item.price * cartItem.qty}</div>
                   <div>
                     <button
                       className="h-min"
-                      onClick={() => dispatch(increment(item))}
+                      onClick={() => dispatch(increment(cartItem.item))}
                     >
                       +
                     </button>
                     <button
                       className="h-min"
-                      onClick={() => dispatch(decrement(item))}
+                      onClick={() => dispatch(decrement(cartItem.item))}
                     >
                       -
                     </button>
                   </div>
                 </div>
-              ))}
+              ) : (
+                <></>
+              ),
+            )}
           </div>
           <div className="ml-2 mt-2 border-2 border-black p-3">
             contador
@@ -75,4 +75,4 @@ function Cart() {
   );
 }
 
-export { Cart, countAmount };
+export { Cart, getQty };

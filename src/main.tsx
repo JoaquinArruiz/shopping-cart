@@ -5,7 +5,8 @@ import { store } from "./app/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import { Browse } from "./components/Browse";
-import {Cart} from "./components/Cart";
+import { ItemPage } from "./components/ItemPage";
+import { Cart } from "./components/Cart";
 import "./index.css";
 import { Toaster } from "sonner";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "browse",
     element: <Browse />,
+  },
+  {
+    path: "item/:id",
+    element: <ItemPage />,
   },
   {
     path: "about",

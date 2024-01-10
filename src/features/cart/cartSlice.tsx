@@ -1,32 +1,55 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { ItemInterface } from "../../inventory";
 
-const initialState: any = { content: [], total: 0 };
+export interface CartItemInterface {
+  item: ItemInterface;
+  qty: number;
+}
+
+const initialState: any = { content: [], total: 0, totalQty: 0 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     increment: (state: any, action) => {
-      state.content.push(action.payload);
-      state.total += action.payload.price;
+      let item = action.payload;
+      let foundItem = false;
+
+      state.content.forEach((cartItem: CartItemInterface) => {
+        if (cartItem.item.id === item.id) {
+          cartItem.qty++;
+          state.total += item.price;
+          foundItem = true;
+          state.totalQty++;
+        }
+      });
+
+      if (!foundItem) {
+        let newCartItem: CartItemInterface = { item: item, qty: 1 };
+        state.content.push(newCartItem);
+        state.total += action.payload.price;
+        state.totalQty++;
+      }
     },
     decrement: (state: any, action) => {
-      let index = -1;
-      for (let i = 0; i < state.content.length; i++) {
-        if (state.content[i].name === action.payload.name) {
-          console.log(index);
-          index = i;
-          break;
+      let item = action.payload;
+      let itemIndex = -1;
+      state.content.forEach((cartItem: CartItemInterface, index: number) => {
+        if (cartItem.item.id === item.id) itemIndex = index;
+      });
+
+      if (itemIndex !== -1) {
+        if (state.content[itemIndex].qty > 0) {
+          state.content[itemIndex].qty--;
+          state.total -= item.price;
+          state.totalQty--;
         }
-      }
-      if (index !== -1) {
-        state.total -= state.content[index].price;
-        state.content.splice(index, 1);
       }
     },
     clear: (state: any) => {
-      const newState: any = { content: [], total: 0 };
+      const newState: any = { content: [], total: 0, totalQty: 0 };
       state = newState;
       return state;
     },
