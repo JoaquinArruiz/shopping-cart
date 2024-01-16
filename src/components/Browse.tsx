@@ -6,40 +6,58 @@ import { Link } from "react-router-dom";
 import { selectCart } from "../features/cart/cartSlice";
 import { Header } from "./Header";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { ItemInterface } from "./../inventory";
+
+let initialInventory: Array<ItemInterface> = [];
 
 function Browse() {
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCart);
+  const [inventory, setInventory] = useState(initialInventory);
+
+  const fetchItem = (): void => {
+    fetch(`https://api.escuelajs.co/api/v1/products?offset=1&limit=10`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        let newInventory: Array<ItemInterface> = [];
+        data.forEach((item: ItemInterface) => {
+          let newItem: ItemInterface = {
+            id: item.id,
+            title: item.title,
+            price: item.price,
+            description: item.description,
+            images: item.images,
+          };
+          newInventory.push(newItem);
+        });
+        setInventory(newInventory);
+      });
+  };
+
+  useEffect(() => {
+    fetchItem();
+  }, []);
 
   return (
     <div>
       <Header />
-      <div className="flex h-screen w-full bg-rama-darker">
-        <div className="m-6 ml-[-15px] flex w-64 flex-col rounded-lg bg-rama-dark px-8 text-xl text-rama-light ">
-          <div className="flex h-32 items-center text-2xl">
-            <p className="text-center">LOGO IPSUM</p>
-          </div>
-          <div>
-            <Link to="/">Homepage</Link>
-          </div>
-          <div>
-            <Link to="">Browse</Link>
-          </div>
-          <div>
-            <Link to="/cart">Cart</Link>
-          </div>
-        </div>
-        <div className="m-6 flex w-full flex-row flex-wrap space-x-5 rounded-lg p-5 text-rama-light">
+      <div className="flex h-full w-full bg-rama-darker">
+        <div className="m-6 flex w-full flex-row flex-wrap space-y-0 rounded-lg p-5 text-rama-light">
           {inventory.map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-1 flex-grow-1 ml-3 h-1/4 min-w-96 flex-1 flex-col justify-between border-r-2 border-rama-dark border-opacity-50"
+              className="max-w-1/4 ml-3 h-1/6 min-w-96 flex-1 flex-col justify-between border-r-2 border-rama-dark border-opacity-50"
             >
-              <img
-                className="h-3/4"
-                src={item.images[0]}
-                alt={item.title + " image"}
-              />
+              <Link to={`/item/${item.id}`}>
+                <img
+                  className="h-3/4"
+                  src={item.images[0]}
+                  alt={item.title + " image"}
+                />
+              </Link>
+
               <div className="flex h-1/4 flex-row items-center justify-between">
                 <p className="h-min w-3/4 text-left text-lg">{item.title}</p>
                 <p className="h-min w-1/4 text-right text-lg">$ {item.price}</p>

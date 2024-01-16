@@ -17,7 +17,7 @@ let emptyItem: ItemInterface = {
   images: [""],
 };
 
-function ItemPage() {
+function ItemPage(itemId: number) {
   const { id } = useParams();
   const [item, setItem] = useState(emptyItem);
 
@@ -25,7 +25,7 @@ function ItemPage() {
   const cart = useAppSelector(selectCart);
 
   const fetchItem = (): void => {
-    fetch(`https://api.escuelajs.co/api/v1/products/4`)
+    fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setItem(data);
