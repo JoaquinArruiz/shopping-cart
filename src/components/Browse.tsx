@@ -20,7 +20,6 @@ function Browse() {
     fetch(`https://api.escuelajs.co/api/v1/products?offset=1&limit=10`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         let newInventory: Array<ItemInterface> = [];
         data.forEach((item: ItemInterface) => {
           let newItem: ItemInterface = {
